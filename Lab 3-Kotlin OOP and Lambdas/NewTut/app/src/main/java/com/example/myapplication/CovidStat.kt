@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 data class CovidStat(
     var id: Int,

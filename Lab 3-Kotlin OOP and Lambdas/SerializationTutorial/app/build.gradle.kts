@@ -1,17 +1,19 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+//    Kotlin serialization Gradle plugin
     kotlin("plugin.serialization") version "1.8.10"
 }
 
 android {
-    namespace = "com.example.myapplication"
-    compileSdk = 33
+    namespace = "com.example.serialization"
+    compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.example.serialization"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -52,9 +54,6 @@ android {
 
 dependencies {
 
-//    JSON dependency
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.7.2")
@@ -70,5 +69,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+//    JSON serialization library dependency:
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
 }
