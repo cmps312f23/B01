@@ -8,6 +8,10 @@ object CovidRepo {
     var covidData = listOf<Covid>()
 
     init {
+//        read from a file
+//        and decode it
+        
+
         val data = File("data/covid-data.json").readText()
         covidData = Json { ignoreUnknownKeys = true }.decodeFromString(data)
 
