@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,8 +38,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.primary
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.primary
                 ) {
                     MyApp(modifier = Modifier.fillMaxSize())
                 }
@@ -73,24 +74,49 @@ fun MyApp(modifier: Modifier = Modifier) {
         "Mr. Marwan",
         "Mr. JUJU"
     )
-    Surface(
-        modifier = modifier,
-        color = MaterialTheme.colorScheme.background
-    ) {
+    var showOnBoarding by rememberSaveable { mutableStateOf(true) }
+
+    if (showOnBoarding) OnBoarding(modifier) { it: Boolean -> showOnBoarding = it }
+    else {
+        Surface(
+            modifier = modifier, color = MaterialTheme.colorScheme.background
+        ) {
 //        Column(modifier = modifier.padding(vertical = 4.dp)) {
 //            for (name in names) {
 //
 //            }
 //        }
 
-        LazyColumn {
-            items(names){
-                Greeting(it)
+
+            LazyColumn {
+                items(names) {
+                    Greeting(it)
+                }
+            }
+
+        }
+    }
+
+
+}
+
+@Composable
+fun OnBoarding(modifier: Modifier = Modifier, updateShowOnBoarding: (Boolean) -> Unit) {
+    Surface(modifier = modifier, color = MaterialTheme.colorScheme.background) {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text("Welcome to Android App Dev")
+            Button(onClick = {
+                updateShowOnBoarding(false)
+            }) {
+                Text(text = "Continue")
             }
         }
-
     }
 }
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -112,14 +138,16 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
             ) {
                 Text(
-                    text = "Hello",
-                    modifier = modifier
+                    text = "Hello", modifier = modifier
                 )
 
                 Text(
-                    text = "$name!",
-                    modifier = modifier
+                    text = "$name!", modifier = modifier
                 )
+
+//                lorem empsum 100
+                if(expanded)
+                    Text("lorem Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.example.myapplication/.MainActivity }")
             }
 
 
@@ -134,6 +162,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         }
     }
 }
+
 
 @Preview(
     showBackground = true,
