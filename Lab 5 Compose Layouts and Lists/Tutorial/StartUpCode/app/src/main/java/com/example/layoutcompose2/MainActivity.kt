@@ -16,31 +16,22 @@
 
 package com.example.layoutcompose2
 
-import android.graphics.fonts.FontStyle
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
@@ -50,12 +41,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -78,8 +67,23 @@ fun SearchBar(
     modifier: Modifier = Modifier
 ) {
     // Implement composable here
-    TextField(value = "", onValueChange = {})
+    TextField(
+        value = stringResource(R.string.search_in_this_place), onValueChange = {},
+        modifier = modifier
+            .fillMaxWidth()
+            .heightIn(56.dp),
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Default.Search,
+                contentDescription = stringResource(R.string.placeholder_search),
+                modifier = Modifier
+                    .size(24.dp)
+                    .clip(CircleShape)
+            )
+        }
+    )
 }
+
 
 // Step: Align your body - Alignment
 @Composable
@@ -88,6 +92,22 @@ fun AlignYourBodyElement(
     @DrawableRes drawable: Int,
     @StringRes text: Int
 ) {
+    Card(modifier = modifier.padding(3.dp)) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = modifier.padding(2.dp)
+        ) {
+            Image(
+                painter = painterResource(id = drawable),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(88.dp)
+                    .clip(CircleShape),
+                contentScale = ContentScale.Crop
+            )
+            Text(text = stringResource(id = text), style = MaterialTheme.typography.bodyMedium)
+        }
+    }
 
 }
 
@@ -99,6 +119,28 @@ fun FavoriteCollectionCard(
     @StringRes text: Int
 ) {
     // Implement composable here
+    Surface(
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        modifier = modifier
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.width(255.dp)
+        ) {
+            Image(
+                painter = painterResource(drawable),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.size(80.dp)
+            )
+            Text(
+                text = stringResource(text),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+        }
+    }
 
 }
 
@@ -109,6 +151,11 @@ fun AlignYourBodyRow(
 ) {
     // Implement composable here
 
+    LazyRow {
+        items(alignYourBodyData) {
+            AlignYourBodyElement(drawable = it.drawable, text = it.text)
+        }
+    }
 }
 
 // Step: Favorite collections grid - LazyGrid
@@ -208,7 +255,9 @@ fun AlignYourBodyElementPreview() {
 fun FavoriteCollectionCardPreview() {
     MySootheTheme {
         FavoriteCollectionCard(
-            modifier = Modifier.padding(8.dp) , R.drawable.fc1_short_mantras, R.string.fc1_short_mantras
+            modifier = Modifier.padding(8.dp),
+            R.drawable.fc1_short_mantras,
+            R.string.fc1_short_mantras
         )
     }
 }
