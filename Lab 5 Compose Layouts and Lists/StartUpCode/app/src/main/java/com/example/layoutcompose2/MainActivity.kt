@@ -79,6 +79,7 @@ fun SearchBar(
 ) {
     // Implement composable here
 
+
 }
 
 // Step: Align your body - Alignment
