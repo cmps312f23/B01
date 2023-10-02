@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -35,7 +36,7 @@ fun StadiumCard(stadium: Stadium) {
     Card {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(10.dp).fillMaxWidth()
         ) {
             Image(
                 painter = painterResource(id = imageId),
@@ -58,7 +59,7 @@ fun StadiumCard(stadium: Stadium) {
 }
 
 @Composable
-fun StadiumList(stadiums: List<Stadium>) {
+fun StadiumList(stadiums: List<Stadium>, paddingValues: PaddingValues) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(10.dp),
         contentPadding = PaddingValues(10.dp)
@@ -74,7 +75,7 @@ fun StadiumList(stadiums: List<Stadium>) {
 fun StadiumListPreview() {
     val stadiums = StadiumRepo.getStadiums(LocalContext.current)
     StadiumsTheme {
-        StadiumList(stadiums)
+        StadiumList(stadiums, PaddingValues(10.dp))
     }
 }
 
