@@ -9,13 +9,14 @@ object StadiumRepo {
 
     fun getStadiums(context: Context): List<Stadium> {
         if (stadiums.isEmpty()) {
-            val jsonContent =
+            val fileJsonTextContent =
                 context
                     .assets
                     .open("stadiums.json")
                     .bufferedReader().use { it.readText() }
 
-            stadiums = Json { ignoreUnknownKeys = true }.decodeFromString(jsonContent)
+//            convert to objects
+            stadiums = Json { ignoreUnknownKeys = true }.decodeFromString(fileJsonTextContent)
         }
         return stadiums
     }
