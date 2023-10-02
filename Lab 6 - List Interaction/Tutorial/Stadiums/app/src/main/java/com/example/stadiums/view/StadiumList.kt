@@ -62,7 +62,7 @@ fun StadiumCard(stadium: Stadium) {
 fun StadiumList(stadiums: List<Stadium>, paddingValues: PaddingValues) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(10.dp),
-        contentPadding = PaddingValues(10.dp)
+        contentPadding = paddingValues
     ) {
         items(stadiums) {
             StadiumCard(stadium = it)

@@ -9,12 +9,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.stadiums.repo.StadiumRepo
 import com.example.stadiums.ui.theme.StadiumsTheme
 import com.example.stadiums.view.StadiumList
+import com.example.stadiums.view.TopBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +43,16 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun MyApp(modifier: Modifier = Modifier) {
-    val stadiums = StadiumRepo.getStadiums(LocalContext.current)
+    val context = LocalContext.current
+    var stadiums by remember {
+        mutableStateOf(StadiumRepo.getStadiums(context))
+    }
 
     Scaffold(
         topBar = {
-            TopBar()
+            TopBar(){
+                stadiums = it
+            }
         }
     ) {
         StadiumList(stadiums = stadiums , it)
