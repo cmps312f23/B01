@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
 
 @Preview
 @Composable
-fun CartScreen(modifier: Modifier = Modifier) {
+fun CartScreen(modifier: Modifier = Modifier, count: Int? , fruit : String?) {
     Box(
         Modifier
             .fillMaxSize()
@@ -21,7 +21,7 @@ fun CartScreen(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Cart Shop", fontSize = 60.sp,
+            text = "Cart Shop $count $fruit", fontSize = 30.sp,
             color = MaterialTheme.colorScheme.onTertiary
         )
     }

@@ -113,7 +113,7 @@ fun MyApp(modifier: Modifier = Modifier) {
                         imageVector = Icons.Default.ShoppingCart,
                         contentDescription = "",
                         modifier = Modifier.padding(10.dp).clickable {
-                            navController.navigate(Screen.CartScreen.route)
+                            navController.navigate("cart/100/orange")
                         }
                     )
                     Icon(
