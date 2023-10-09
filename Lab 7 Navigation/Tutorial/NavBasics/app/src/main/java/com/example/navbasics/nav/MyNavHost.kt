@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.navbasics.ui.screen.CartScreen
 import com.example.navbasics.ui.screen.Screen
 import com.example.navbasics.ui.screen.Screen1
 import com.example.navbasics.ui.screen.Screen2
@@ -23,6 +24,10 @@ fun MyNavHost(navController: NavHostController, paddingValues: PaddingValues) {
         }
         composable(route = Screen.SecondScreen.route){
             Screen2(Modifier.padding(paddingValues))
+        }
+
+        composable(route = Screen.CartScreen.route){
+            CartScreen(Modifier.padding(paddingValues))
         }
     }
 }
