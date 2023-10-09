@@ -120,7 +120,7 @@ fun MyApp(modifier: Modifier = Modifier) {
                         imageVector = Icons.Default.Favorite,
                         contentDescription = "",
                         modifier = Modifier.padding(10.dp).clickable {
-                            navController.navigate(Screen.CartScreen.route)
+                            navController.navigate(Screen.FavScreen.route)
                         }
                     )
                 }

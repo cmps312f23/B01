@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.navbasics.ui.screen.CartScreen
+import com.example.navbasics.ui.screen.FavScreen
 import com.example.navbasics.ui.screen.Screen
 import com.example.navbasics.ui.screen.Screen1
 import com.example.navbasics.ui.screen.Screen2
@@ -28,6 +29,9 @@ fun MyNavHost(navController: NavHostController, paddingValues: PaddingValues) {
 
         composable(route = Screen.CartScreen.route){
             CartScreen(Modifier.padding(paddingValues))
+        }
+        composable(route = Screen.FavScreen.route){
+            FavScreen(Modifier.padding(paddingValues))
         }
     }
 }
