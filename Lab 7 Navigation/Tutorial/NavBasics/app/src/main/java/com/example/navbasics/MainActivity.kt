@@ -30,6 +30,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.example.navbasics.nav.MyNavHost
 import com.example.navbasics.ui.screen.Screen
 import com.example.navbasics.ui.screen.Screen1
 import com.example.navbasics.ui.screen.Screen2
@@ -58,13 +60,17 @@ fun MyApp(modifier: Modifier = Modifier) {
         Screen.FirstScreen,
         Screen.SecondScreen
     )
+    val navController = rememberNavController()
+
     Scaffold(
         bottomBar = {
 
             NavigationBar {
                 screens.forEach {
                     NavigationBarItem(selected = false,
-                        onClick = { /*TODO*/ },
+                        onClick = {
+                            navController.navigate(it.route)
+                        },
                         label = { Text(it.title) },
                         icon = {
                             Icon(imageVector = it.icon, contentDescription = "")
@@ -74,7 +80,7 @@ fun MyApp(modifier: Modifier = Modifier) {
             }
         }
     ) {
-
+        MyNavHost(navController = navController, paddingValues = it)
     }
 }
 
