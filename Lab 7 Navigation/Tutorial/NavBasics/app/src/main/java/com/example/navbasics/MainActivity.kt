@@ -17,8 +17,11 @@ import androidx.compose.material.icons.filled.BrokenImage
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.navbasics.ui.screen.Screen
 import com.example.navbasics.ui.screen.Screen1
 import com.example.navbasics.ui.screen.Screen2
 import com.example.navbasics.ui.theme.NavBasicsTheme
@@ -50,41 +54,27 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyApp(modifier: Modifier = Modifier) {
-    var showScreen1 by remember {
-        mutableStateOf(true)
-    }
+    val screens = listOf(
+        Screen.FirstScreen,
+        Screen.SecondScreen
+    )
     Scaffold(
         bottomBar = {
-            Row(
-                Modifier
-                    .background(MaterialTheme.colorScheme.onPrimary)
-                    .heightIn(80.dp)
-                    .fillMaxWidth(),
 
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                Icon(
-                    imageVector = Icons.Default.BrokenImage,
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(70.dp)
-                        .clickable {
-                            showScreen1 = true
+            NavigationBar {
+                screens.forEach {
+                    NavigationBarItem(selected = false,
+                        onClick = { /*TODO*/ },
+                        label = { Text(it.title) },
+                        icon = {
+                            Icon(imageVector = it.icon, contentDescription = "")
                         })
-                Icon(
-                    imageVector = Icons.Default.ExitToApp,
-                    contentDescription = "",
-                    modifier = Modifier
-                        .size(70.dp)
-                        .clickable {
-                            showScreen1 = false
-                        })
+                }
 
             }
         }
     ) {
-        if (showScreen1) Screen1(Modifier.padding(it))
-        else Screen2(Modifier.padding(it))
+
     }
 }
 

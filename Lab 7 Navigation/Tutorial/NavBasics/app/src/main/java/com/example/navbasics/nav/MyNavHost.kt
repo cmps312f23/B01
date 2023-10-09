@@ -2,7 +2,6 @@ package com.example.navbasics.nav
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,13 +13,13 @@ import com.example.navbasics.ui.screen.Screen2
 fun MyNavHost(navController: NavHostController, paddingValues: PaddingValues) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Screen1.route
+        startDestination = Screen.FirstScreen.route
     ) {
 //        do the mapping
-        composable(route = Screen.Screen1.route){
+        composable(route = Screen.FirstScreen.route){
             Screen1()
         }
-        composable(route = Screen.Screen2.route){
+        composable(route = Screen.SecondScreen.route){
             Screen2()
         }
     }
