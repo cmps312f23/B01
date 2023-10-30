@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,7 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.cmps312.viewmodeltutorial.ui.theme.ViewModelTutorialTheme
+import com.cmps312.viewmodeltutorial.vm.MyViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,16 +48,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    var counter by rememberSaveable {
-        mutableStateOf(0)
+    Column {
+        Screen1()
+        Screen2()
     }
-    Text(
-        text = "Number of times clicked is $counter",
-        modifier = modifier.clickable {
-            counter++
-        },
-        fontSize = 20.sp
-    )
 
 }
 
