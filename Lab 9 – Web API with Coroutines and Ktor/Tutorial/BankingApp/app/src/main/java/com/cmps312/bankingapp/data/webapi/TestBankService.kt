@@ -14,20 +14,13 @@ suspend fun main() {
 
         val transfer = Transfer(
             fromAccountNo = "19123-1456-789",
-            amount = 300.0,
-            beneficiaryName = "Abdulrahman Mohamed",
+            amount = 1300.0,
+            beneficiaryName = "Abdullah Mohamed",
             beneficiaryAccountNo = "8123-2456-789",
             cid = 10001
         )
-        /*
-           "beneficiaryName": "Mohamed Hassen",
-    "beneficiaryAccountNo": "8123-2456-789",
-    "fromAccountNo": "19123-1456-789",
-    "amount": 7230,
-    "cid": 10001
-  }
-         */
-        val addedTransfer = bankService.addTransfer(transfer)
+
+        val addedTransfer = bankService.addTransfers(transfer, transfer.transferId)
         println(Json { prettyPrint = true }.encodeToString(addedTransfer))
     }
 

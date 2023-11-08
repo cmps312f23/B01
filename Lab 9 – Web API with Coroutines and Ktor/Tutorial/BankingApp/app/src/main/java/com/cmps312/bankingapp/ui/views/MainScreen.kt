@@ -28,7 +28,7 @@ fun MainScreen() {
         bottomBar = { BottomBar(navHostController) }
     ) { paddingValues ->
 //        AppNavigator(navHostController, paddingValues)
-        TestTheListOfAccounts(paddingValues)
+//        TestTheListOfAccounts(paddingValues)
     }
 }
 
