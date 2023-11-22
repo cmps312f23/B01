@@ -30,7 +30,12 @@ class TodoRepository {
 
     fun addProject(project: Project) = projectsCollectionRef.add(project)
     fun updateProject(project: Project) = projectsCollectionRef.document(project.id).set(project)
-    fun deleteProject(project: Project) = projectsCollectionRef.document(project.id).delete()
+    suspend fun deleteProject(project: Project) {
+        val todos = getTodoListByProject(project.id)
+        todos.forEach { deleteTodo(it) }
+        projectsCollectionRef.document(project.id).delete()
+    }
+
     fun observeTodos(pid: String): Flow<List<Todo>> = callbackFlow {
         val snapshot = todosCollectionRef
             .whereEqualTo("pid", pid)
@@ -48,13 +53,16 @@ class TodoRepository {
     }
 
     suspend fun getTodo(id: String) =
-        todosCollectionRef.document(id).get().await().toObject(Todo::class.java)
+        todosCollectionRef
+            .document(id)
+            .get().await().toObject(Todo::class.java)
 
     fun addTodo(todo: Todo) = todosCollectionRef.add(todo)
 
     fun updateTodo(todo: Todo) = todosCollectionRef.document(todo.id).set(todo)
     fun deleteTodo(todo: Todo) = todosCollectionRef.document(todo.id).delete()
-    suspend fun getTodoListByProject(pid: String) = todosCollectionRef.whereEqualTo("pid", pid)
+    private suspend fun getTodoListByProject(pid: String) = todosCollectionRef
+        .whereEqualTo("pid", pid)
         .get()
         .await()
         .toObjects(Todo::class.java)

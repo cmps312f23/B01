@@ -3,10 +3,12 @@ package com.cmps312.todolistapp
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -33,7 +35,7 @@ fun MainScreen() {
         topBar = {
             Column {
                 TopBar(navHostController, currentRoute)
-                Divider()
+                HorizontalDivider()
             }
 
         },
@@ -57,7 +59,7 @@ fun TopBar(navHostController: NavHostController, currentRoute: String?) {
         navigationIcon = {
             if (currentRoute?.equals(Screen.ProjectScreen.route) != true)
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
                     modifier = Modifier.clickable { navHostController.popBackStack() },
                     tint = MaterialTheme.colorScheme.onSecondary

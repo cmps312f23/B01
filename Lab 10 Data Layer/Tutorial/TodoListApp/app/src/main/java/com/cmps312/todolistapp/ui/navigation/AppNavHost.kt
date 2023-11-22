@@ -23,6 +23,9 @@ import com.cmps312.todolistapp.ui.viewmodel.TodolistViewModel
 fun AppNavHost(navHostController: NavHostController, paddingValues: PaddingValues) {
     val todolistViewModel =
         viewModel<TodolistViewModel>(viewModelStoreOwner = LocalContext.current as ComponentActivity)
+    val projects =
+        todolistViewModel.projectsFlow.collectAsStateWithLifecycle(initialValue = emptyList()).value
+
 
     NavHost(
         navController = navHostController,
@@ -32,7 +35,7 @@ fun AppNavHost(navHostController: NavHostController, paddingValues: PaddingValue
 
         composable(route = Screen.ProjectScreen.route) {
             ProjectScreen(
-                projects = todolistViewModel.projectsFlow.collectAsStateWithLifecycle().value,
+                projects = projects,
                 onAddProject = {
                     todolistViewModel.isEditMode = false
                     navHostController.navigate(Screen.ProjectEditor.route)
@@ -88,6 +91,8 @@ fun AppNavHost(navHostController: NavHostController, paddingValues: PaddingValue
 
         composable(route = Screen.TodoEditor.route) {
             val todo = Todo(pid = todolistViewModel.selectedProject.id)
+            todolistViewModel.updateUiStateOfTodo(todo)
+
             TodoEditor(todo, onSubmitTodo = {
                 todolistViewModel.addTodo(it)
                 navHostController.navigate(Screen.TodoScreen.route) {

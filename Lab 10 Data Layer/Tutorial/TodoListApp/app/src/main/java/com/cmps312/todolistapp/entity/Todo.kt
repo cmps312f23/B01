@@ -26,4 +26,7 @@ data class Todo(
 
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-)
+
+    ) {
+    constructor() : this("", "", "", "", 0)
+}

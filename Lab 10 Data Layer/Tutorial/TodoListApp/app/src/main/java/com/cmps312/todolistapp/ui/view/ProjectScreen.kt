@@ -1,5 +1,6 @@
 package com.cmps312.todolistapp.ui.view
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -41,6 +42,7 @@ fun ProjectScreen(
     onDeleteProject: (Project) -> Unit,
     onEditProject: (Project) -> Unit
 ) {
+    Log.d("ProjectScreen", projects.toString())
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
