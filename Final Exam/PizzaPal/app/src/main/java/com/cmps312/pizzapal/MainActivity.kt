@@ -1,5 +1,6 @@
 package com.cmps312.pizzapal
 
+import OrderScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,7 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-//                    OrderScreen()
+                    OrderScreen()
 //                    OrderItemScreen()
                     OrderEditor(onSubmit = {})
 //                    OrderItemEditor(pizza = Pizza(
